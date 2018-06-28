@@ -18,12 +18,6 @@ import torch.backends.cudnn as cudnn
 from torch.autograd import Variable
 from model import NetworkImageNet as Network
 
-try:
-    xrange          # Python 2
-except NameError:
-    xrange = range  # Python 3
-
-
 parser = argparse.ArgumentParser("imagenet")
 parser.add_argument('--data', type=str, default='../data/imagenet/', help='location of the data corpus')
 parser.add_argument('--batch_size', type=int, default=128, help='batch size')
@@ -146,7 +140,7 @@ def main():
   scheduler = torch.optim.lr_scheduler.StepLR(optimizer, args.decay_period, gamma=args.gamma)
 
   best_acc_top1 = 0
-  for epoch in xrange(args.epochs):
+  for epoch in range(args.epochs):
     scheduler.step()
     logging.info('epoch %d lr %e', epoch, scheduler.get_lr()[0])
     model.drop_path_prob = args.drop_path_prob * epoch / args.epochs
@@ -233,4 +227,3 @@ def infer(valid_queue, model, criterion):
 
 if __name__ == '__main__':
   main() 
-
