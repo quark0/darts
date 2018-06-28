@@ -18,6 +18,7 @@ import torch.backends.cudnn as cudnn
 from torch.autograd import Variable
 from model import NetworkImageNet as Network
 
+
 parser = argparse.ArgumentParser("imagenet")
 parser.add_argument('--data', type=str, default='../data/imagenet/', help='location of the data corpus')
 parser.add_argument('--batch_size', type=int, default=128, help='batch size')
