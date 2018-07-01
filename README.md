@@ -11,7 +11,7 @@ The algorithm is based on continuous relaxation and gradient descent in the arch
 
 ## Requirements
 ```
-Python >= 3.5.5, PyTorch == 0.3.1, torchvision >= 0.2.1
+Python >= 3.5.5, PyTorch == 0.3.1, torchvision 0.2.0
 ```
 PyTorch 0.4 will be supported soon.
 
@@ -41,3 +41,12 @@ cd cnn && python train_imagenet.py --auxiliary            # ImageNet
 ```
 Customized architectures are supported through the `--arch` flag once specified in `genotypes.py`.
 
+## Citation
+```
+@article{liu2018darts,
+  title={DARTS: Differentiable Architecture Search},
+  author={Liu, Hanxiao and Simonyan, Karen and Yang, Yiming},
+  journal={arXiv preprint arXiv:1806.09055},
+  year={2018}
+}
+```
