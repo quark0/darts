@@ -11,7 +11,7 @@ The algorithm is based on continuous relaxation and gradient descent in the arch
 
 ## Requirements
 ```
-Python >= 3.5.5, PyTorch == 0.3.1, torchvision 0.2.0
+Python >= 3.5.5, PyTorch == 0.3.1, torchvision == 0.2.0
 ```
 PyTorch 0.4 will be supported soon.
 
