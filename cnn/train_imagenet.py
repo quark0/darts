@@ -141,7 +141,7 @@ def main():
   scheduler = torch.optim.lr_scheduler.StepLR(optimizer, args.decay_period, gamma=args.gamma)
 
   best_acc_top1 = 0
-  for epoch in xrange(args.epochs):
+  for epoch in range(args.epochs):
     scheduler.step()
     logging.info('epoch %d lr %e', epoch, scheduler.get_lr()[0])
     model.drop_path_prob = args.drop_path_prob * epoch / args.epochs
@@ -228,4 +228,3 @@ def infer(valid_queue, model, criterion):
 
 if __name__ == '__main__':
   main() 
-
