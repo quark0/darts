@@ -19,7 +19,7 @@ PyTorch 0.4 will be supported soon.
 Instructions for acquiring PTB and WT2 can be found [here](https://github.com/salesforce/awd-lstm-lm). While CIFAR-10 can be automatically downloaded by torchvision, ImageNet needs to be manually downloaded (preferably to a SSD) following the instructions [here](https://github.com/pytorch/examples/tree/master/imagenet).
 
 ## Architecture Search
-To carry out architecture search, run
+To carry out architecture search (using 2nd order approximation), run
 ```
 cd cnn && python train_search.py --unrolled     # for conv cells on CIFAR-10
 cd rnn && python train_search.py --unrolled     # for recurrent cells on PTB
