@@ -19,11 +19,13 @@ NOTE: PyTorch 0.4 is not supported at this moment and would lead to OOM.
 Instructions for acquiring PTB and WT2 can be found [here](https://github.com/salesforce/awd-lstm-lm). While CIFAR-10 can be automatically downloaded by torchvision, ImageNet needs to be manually downloaded (preferably to a SSD) following the instructions [here](https://github.com/pytorch/examples/tree/master/imagenet).
 
 ## Architecture Search
-To carry out architecture search (using 2nd order approximation), run
+To carry out architecture search using 1st-order approximation, run
 ```
-cd cnn && python train_search.py --unrolled     # for conv cells on CIFAR-10
-cd rnn && python train_search.py --unrolled     # for recurrent cells on PTB
+cd cnn && python train_search.py     # for conv cells on CIFAR-10
+cd rnn && python train_search.py     # for recurrent cells on PTB
 ```
+2nd-order approximation can be enabled by adding the `--unrolled` flag.
+
 Snapshots of the most likely convolutional & recurrent cells over time:
 <p align="center">
 <img src="img/progress_convolutional.gif" alt="progress_convolutional" width="38%">
