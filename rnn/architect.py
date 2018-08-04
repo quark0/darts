@@ -1,7 +1,6 @@
 import torch
 import numpy as np
 import torch.nn as nn
-from model_search import RNNModel
 from torch.autograd import Variable
 
 
@@ -19,7 +18,7 @@ def _clip(grads, max_norm):
     if clip_coef < 1:
         for g in grads:
             g.data.mul_(clip_coef)
-    return total_norm
+    return clip_coef
 
 
 class Architect(object):
@@ -28,57 +27,52 @@ class Architect(object):
     self.network_weight_decay = args.wdecay
     self.network_clip = args.clip
     self.model = model
-    self.optimizer = torch.optim.Adam(
-        self.model.arch_parameters(), lr=args.arch_lr, weight_decay=args.arch_wdecay)
+    self.optimizer = torch.optim.Adam(self.model.arch_parameters(), lr=args.arch_lr, weight_decay=args.arch_wdecay)
 
   def _compute_unrolled_model(self, hidden, input, target, eta):
     loss, hidden_next = self.model._loss(hidden, input, target)
     theta = _concat(self.model.parameters()).data
     grads = torch.autograd.grad(loss, self.model.parameters())
-    _clip(grads, self.network_clip)
+    clip_coef = _clip(grads, self.network_clip)
     dtheta = _concat(grads).data + self.network_weight_decay*theta
-    model_unrolled = self._construct_model_from_theta(theta.sub(eta, dtheta))
-    return model_unrolled
+    unrolled_model = self._construct_model_from_theta(theta.sub(eta, dtheta))
+    return unrolled_model, clip_coef
 
-  def step(self, hidden_train, input_train, target_train,
-          hidden_valid, input_valid, target_valid, network_optimizer, unrolled):
+  def step(self,
+          hidden_train, input_train, target_train,
+          hidden_valid, input_valid, target_valid,
+          network_optimizer, unrolled):
     eta = network_optimizer.param_groups[0]['lr']
     self.optimizer.zero_grad()
     if unrolled:
-        hidden = self._backward_step_unrolled(
-            hidden_train, input_train, target_train,
-            hidden_valid, input_valid, target_valid, eta)
+        hidden = self._backward_step_unrolled(hidden_train, input_train, target_train, hidden_valid, input_valid, target_valid, eta)
     else:
         hidden = self._backward_step(hidden_valid, input_valid, target_valid)
-
     self.optimizer.step()
     return hidden, None
 
   def _backward_step(self, hidden, input, target):
     loss, hidden_next = self.model._loss(hidden, input, target)
-    for v in self.model.arch_parameters():
-      if v.grad is not None:
-        v.grad.data.zero_()
     loss.backward()
     return hidden_next
 
-  def _backward_step_unrolled(self, hidden_train, input_train, target_train,
+  def _backward_step_unrolled(self,
+          hidden_train, input_train, target_train,
           hidden_valid, input_valid, target_valid, eta):
-    model_unrolled = self._compute_unrolled_model(hidden_train, input_train, target_train, eta)
-    loss, hidden_next = model_unrolled._loss(hidden_valid, input_valid, target_valid)
-    grads = torch.autograd.grad(loss, model_unrolled.arch_parameters(), retain_graph=True)
+    unrolled_model, clip_coef = self._compute_unrolled_model(hidden_train, input_train, target_train, eta)
+    unrolled_loss, hidden_next = unrolled_model._loss(hidden_valid, input_valid, target_valid)
 
-    theta = model_unrolled.parameters()
-    dtheta = torch.autograd.grad(loss, model_unrolled.parameters())
+    unrolled_loss.backward()
+    dalpha = [v.grad for v in unrolled_model.arch_parameters()]
+    dtheta = [v.grad for v in unrolled_model.parameters()]
     _clip(dtheta, self.network_clip)
-    vector = [dt.data.add(self.network_weight_decay, t.data) for dt, t in zip(dtheta, theta)]
-    grads_implicit = self._hessian_vector_product(
-            model_unrolled, vector, hidden_train, input_train, target_train)
+    vector = [dt.data for dt in dtheta]
+    implicit_grads = self._hessian_vector_product(vector, hidden_train, input_train, target_train, r=1e-2)
 
-    for g, ig in zip(grads, grads_implicit):
-      g.data.sub_(eta, ig.data)
+    for g, ig in zip(dalpha, implicit_grads):
+      g.data.sub_(eta * clip_coef, ig.data)
 
-    for v, g in zip(self.model.arch_parameters(), grads):
+    for v, g in zip(self.model.arch_parameters(), dalpha):
       if v.grad is None:
         v.grad = Variable(g.data)
       else:
@@ -86,7 +80,7 @@ class Architect(object):
     return hidden_next
 
   def _construct_model_from_theta(self, theta):
-    model_clone = self.model.clone()
+    model_new = self.model.new()
     model_dict = self.model.state_dict()
 
     params, offset = {}, 0
@@ -97,23 +91,23 @@ class Architect(object):
 
     assert offset == len(theta)
     model_dict.update(params)
-    model_clone.load_state_dict(model_dict)
-    return model_clone.cuda()
+    model_new.load_state_dict(model_dict)
+    return model_new.cuda()
 
-  def _hessian_vector_product(self, model, vector, hidden, input, target, r=1e-2):
+  def _hessian_vector_product(self, vector, hidden, input, target, r=1e-2):
     R = r / _concat(vector).norm()
-    for p, v in zip(model.parameters(), vector):
+    for p, v in zip(self.model.parameters(), vector):
       p.data.add_(R, v)
-    loss, _ = model._loss(hidden, input, target)
-    grads_p = torch.autograd.grad(loss, model.arch_parameters())
+    loss, _ = self.model._loss(hidden, input, target)
+    grads_p = torch.autograd.grad(loss, self.model.arch_parameters())
 
-    for p, v in zip(model.parameters(), vector):
+    for p, v in zip(self.model.parameters(), vector):
       p.data.sub_(2*R, v)
-    loss, _ = model._loss(hidden, input, target)
-    grads_n = torch.autograd.grad(loss, model.arch_parameters())
+    loss, _ = self.model._loss(hidden, input, target)
+    grads_n = torch.autograd.grad(loss, self.model.arch_parameters())
 
-    for p, v in zip(model.parameters(), vector):
+    for p, v in zip(self.model.parameters(), vector):
       p.data.add_(R, v)
 
-    return [(x-y).div_(2*R + 1e-10) for x, y in zip(grads_p, grads_n)]
+    return [(x-y).div_(2*R) for x, y in zip(grads_p, grads_n)]
 

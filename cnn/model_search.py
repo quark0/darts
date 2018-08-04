@@ -94,6 +94,12 @@ class Network(nn.Module):
 
     self._initialize_alphas()
 
+  def new(self):
+    model_new = Network(self._C, self._num_classes, self._layers, self._criterion).cuda()
+    for x, y in zip(model_new.arch_parameters(), self.arch_parameters()):
+        x.data.copy_(y.data)
+    return model_new
+
   def forward(self, input):
     s0 = s1 = self.stem(input)
     for i, cell in enumerate(self.cells):

@@ -50,11 +50,11 @@ class RNNModelSearch(RNNModel):
         self._args = args
         self._initialize_arch_parameters()
 
-    def clone(self):
-        model_clone = RNNModelSearch(*self._args)
-        for x, y in zip(model_clone.arch_parameters(), self.arch_parameters()):
+    def new(self):
+        model_new = RNNModelSearch(*self._args)
+        for x, y in zip(model_new.arch_parameters(), self.arch_parameters()):
             x.data.copy_(y.data)
-        return model_clone
+        return model_new
 
     def _initialize_arch_parameters(self):
       k = sum(i for i in range(1, STEPS+1))
