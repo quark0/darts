@@ -33,7 +33,7 @@ Snapshots of the most likely convolutional & recurrent cells over time:
 </p>
 
 ## Architecture Evaluation
-To reproduce our results using the best cells, run
+To evaluate our best cells, run
 ```
 cd cnn && python train.py --auxiliary --cutout            # CIFAR-10
 cd rnn && python train.py                                 # PTB
