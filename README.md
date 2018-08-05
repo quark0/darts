@@ -43,6 +43,12 @@ cd cnn && python train_imagenet.py --auxiliary            # ImageNet
 ```
 Customized architectures are supported through the `--arch` flag once specified in `genotypes.py`.
 
+Expected performance on CIFAR-10 (4 runs) and PTB:
+<p align="center">
+<img src="img/cifar10.png" alt="cifar10" width="40%">
+<img src="img/ptb.png" alt="ptb" width="40%">
+</p>
+
 ## Citation
 ```
 @article{liu2018darts,
