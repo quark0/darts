@@ -50,7 +50,7 @@ Expected performance on CIFAR-10 (4 runs) and PTB:
 </p>
 
 ## Visualization
-You will need to install [graphviz](https://graphviz.readthedocs.io/en/stable/index.html) in order to use our visualization scripts
+Package [graphviz](https://graphviz.readthedocs.io/en/stable/index.html) is required to visualize the learned cells
 ```
 cd cnn && python visualize.py DARTS
 cd rnn && python visualize.py DARTS
