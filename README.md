@@ -52,8 +52,7 @@ Expected performance on CIFAR-10 (4 runs) and PTB:
 ## Visualization
 Package [graphviz](https://graphviz.readthedocs.io/en/stable/index.html) is required to visualize the learned cells
 ```
-cd cnn && python visualize.py DARTS
-cd rnn && python visualize.py DARTS
+python visualize.py DARTS
 ```
 where `DARTS` can be replaced by any customized architectures in `genotypes.py`.
 
