@@ -49,6 +49,14 @@ Expected performance on CIFAR-10 (4 runs) and PTB:
 <img src="img/ptb.png" alt="ptb" width="40%">
 </p>
 
+## Visualization
+You will need to install [graphviz](https://graphviz.readthedocs.io/en/stable/index.html) in order to use our visualization scripts
+```
+cd cnn && python visualize.py DARTS
+cd rnn && python visualize.py DARTS
+```
+where `DARTS` can be replaced by any customized architectures in `genotypes.py`.
+
 ## Citation
 ```
 @article{liu2018darts,
