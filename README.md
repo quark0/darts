@@ -57,6 +57,7 @@ python visualize.py DARTS
 where `DARTS` can be replaced by any customized architectures in `genotypes.py`.
 
 ## Citation
+If you use any part of this code in your research, please cite our [paper](https://arxiv.org/abs/1806.09055):
 ```
 @article{liu2018darts,
   title={DARTS: Differentiable Architecture Search},
