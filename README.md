@@ -18,13 +18,32 @@ NOTE: PyTorch 0.4 is not supported at this moment and would lead to OOM.
 ## Datasets
 Instructions for acquiring PTB and WT2 can be found [here](https://github.com/salesforce/awd-lstm-lm). While CIFAR-10 can be automatically downloaded by torchvision, ImageNet needs to be manually downloaded (preferably to a SSD) following the instructions [here](https://github.com/pytorch/examples/tree/master/imagenet).
 
-## Architecture Search
-To carry out architecture search using 1st-order approximation, run
+## Evaluating our pretrained models
+#### CIFAR-10 ([model download](https://drive.google.com/file/d/1Y13i4zKGKgjtWBdC0HWLavjO7wvEiGOc/view?usp=sharing))
 ```
-cd cnn && python train_search.py     # for conv cells on CIFAR-10
-cd rnn && python train_search.py     # for recurrent cells on PTB
+cd cnn && python3 test.py --auxiliary --model_path cifar10_model.pt
 ```
-2nd-order approximation can be enabled by adding the `--unrolled` flag.
+Expected result: 2.63% test error rate.
+
+#### PTB ([model download](https://drive.google.com/file/d/1Mt_o6fZOlG-VDF3Q5ModgnAJ9W6f_av2/view?usp=sharing))
+```
+cd rnn && python3 test.py
+```
+Expected result: 55.68 test ppl.
+
+#### ImageNet ([model download](https://drive.google.com/file/d/1AKr6Y_PoYj7j0Upggyzc26W0RVdg4CVX/view?usp=sharing))
+```
+cd cnn && python3 test_imagenet.py --auxiliary --model_path imagenet_model.pt
+```
+Expected result: 26.7% top-1 acc; 8.7% top-5 acc.
+
+## Architecture search (using smaller proxy models)
+To carry out architecture search using 2nd-order approximation, run
+```
+cd cnn && python train_search.py --unrolled     # for conv cells on CIFAR-10
+cd rnn && python train_search.py --unrolled     # for recurrent cells on PTB
+```
+Note the _validation performance in this step does not indicate the final performance of the architecture_. One must train the obtained architecture from scratch using full-sized models, as described in the next section.
 
 Snapshots of the most likely convolutional & recurrent cells over time:
 <p align="center">
@@ -32,8 +51,8 @@ Snapshots of the most likely convolutional & recurrent cells over time:
 <img src="img/progress_recurrent.gif" alt="progress_recurrent" width="48%">
 </p>
 
-## Architecture Evaluation
-To evaluate our best cells, run
+## Architecture evaluation (using full-sized models)
+To evaluate our best cells by training from scratch, run
 ```
 cd cnn && python train.py --auxiliary --cutout            # CIFAR-10
 cd rnn && python train.py                                 # PTB
