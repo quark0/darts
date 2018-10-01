@@ -49,9 +49,9 @@ Note the _validation performance in this step does not indicate the final perfor
 
 
 <p align="center">
-<img src="img/progress_convolutional_normal.gif" alt="progress_convolutional_normal" width="30%">
+<img src="img/progress_convolutional_normal.gif" alt="progress_convolutional_normal" width="29%">
 <img src="img/progress_convolutional_reduce.gif" alt="progress_convolutional_reduce" width="35%">
-<img src="img/progress_recurrent.gif" alt="progress_recurrent" width="34%">
+<img src="img/progress_recurrent.gif" alt="progress_recurrent" width="33%">
 </p>
 <p align="center">
 Figure: Snapshots of the most likely normal conv, reduction conv, and recurrent cells over time.
