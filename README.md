@@ -38,7 +38,7 @@ cd cnn && python test_imagenet.py --auxiliary --model_path imagenet_model.pt
 ```
 Expected result: 26.7% top-1 acc and 8.7% top-5 acc with 4.7M model params.
 
-## Architecture search (using smaller proxy models)
+## Architecture search (using small proxy models)
 To carry out architecture search using 2nd-order approximation, run
 ```
 cd cnn && python train_search.py --unrolled     # for conv cells on CIFAR-10
