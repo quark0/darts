@@ -54,7 +54,7 @@ Note the _validation performance in this step does not indicate the final perfor
 <img src="img/progress_recurrent.gif" alt="progress_recurrent" width="34%">
 </p>
 <p align="center">
-Snapshots of the most likely normal conv, reduction conv, and recurrent cells during arch search.
+Figure: Snapshots of the most likely normal conv, reduction conv, and recurrent cells over time.
 </p>
 
 ## Architecture evaluation (using full-sized models)
@@ -76,7 +76,7 @@ The CIFAR-10 result at the end of training is subject to variance due to the non
 <img src="img/ptb.png" alt="ptb" width="30%">
 </p>
 <p align="center">
-Expected learning curves on CIFAR-10 (4 runs), ImageNet and PTB.
+Figure: Expected learning curves on CIFAR-10 (4 runs), ImageNet and PTB.
 </p>
 
 ## Visualization
