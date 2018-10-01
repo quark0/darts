@@ -45,7 +45,7 @@ parser.add_argument('--dropoutx', type=float, default=0.75,
                     help='dropout for input nodes rnn layers (0 = no dropout)')
 parser.add_argument('--dropouti', type=float, default=0.2,
                     help='dropout for input embedding layers (0 = no dropout)')
-parser.add_argument('--dropoute', type=float, default=0,
+parser.add_argument('--dropoute', type=float, default=0.1,
                     help='dropout to remove words from embedding layer (0 = no dropout)')
 parser.add_argument('--seed', type=int, default=1267,
                     help='random seed')

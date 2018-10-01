@@ -47,8 +47,8 @@ parser.add_argument('--cuda', action='store_false',
                     help='use CUDA')
 parser.add_argument('--log-interval', type=int, default=200, metavar='N',
                     help='report interval')
-parser.add_argument('--save', type=str,  default='EXP',
-                    help='path to save the final model')
+parser.add_argument('--model_path', type=str,  default='EXP/model.pt',
+                    help='path to load the pretrained model')
 parser.add_argument('--alpha', type=float, default=0,
                     help='alpha L2 regularization on RNN activation (alpha = 0 means no regularization)')
 parser.add_argument('--beta', type=float, default=1e-3,
@@ -105,7 +105,7 @@ def evaluate(data_source, batch_size=10):
     return total_loss[0] / len(data_source)
 
 # Load the best saved model.
-model = torch.load(os.path.join(args.save, 'model.pt'))
+model = torch.load(args.model_path)
 
 total_params = sum(x.data.nelement() for x in model.parameters())
 logging('Args: {}'.format(args))
