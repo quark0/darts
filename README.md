@@ -44,7 +44,7 @@ To carry out architecture search using 2nd-order approximation, run
 cd cnn && python train_search.py --unrolled     # for conv cells on CIFAR-10
 cd rnn && python train_search.py --unrolled     # for recurrent cells on PTB
 ```
-Note the _validation performance in this step does not indicate the final performance of the architecture_. One must train the obtained architecture from scratch using full-sized models, as described in the next section.
+Note the _validation performance in this step does not indicate the final performance of the architecture_. One must train the obtained genotype/architecture from scratch using full-sized models, as described in the next section.
 
 Snapshots of the most likely convolutional & recurrent cells over time:
 <p align="center">
@@ -63,7 +63,7 @@ cd cnn && python train_imagenet.py --auxiliary            # ImageNet
 ```
 Customized architectures are supported through the `--arch` flag once specified in `genotypes.py`.
 
-The CIFAR-10 result at epoch 600 is subject to variance due to the non-determinism of cuDNN back-prop kernels. _It would be misleading to report the result of only a single run_. By training our best cell from scratch, one should expect the average test accuracy of 10 runs to fall in the range of 2.76 +/- 0.09% with a high probability.
+The CIFAR-10 result at the end of training is subject to variance due to the non-determinism of cuDNN back-prop kernels. _It would be misleading to report the result of only a single run_. By training our best cell from scratch, one should expect the average test accuracy of 10 runs to fall in the range of 2.76 +/- 0.09% with a high probability.
 
 Expected learning curves on CIFAR-10 (4 runs) and PTB:
 <p align="center">
