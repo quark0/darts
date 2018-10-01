@@ -31,13 +31,13 @@ Expected result: 2.63% test error rate with 3.3M model params.
 ```
 cd rnn && python test.py --model_path ptb_model.pt
 ```
-Expected result: 55.68 test ppl with 23M model params.
+Expected result: 55.68 test perplexity with 23M model params.
 
 **ImageNet** ([imagenet_model.pt](https://drive.google.com/file/d/1AKr6Y_PoYj7j0Upggyzc26W0RVdg4CVX/view?usp=sharing))
 ```
 cd cnn && python test_imagenet.py --auxiliary --model_path imagenet_model.pt
 ```
-Expected result: 26.7% top-1 acc and 8.7% top-5 acc with 4.7M model params.
+Expected result: 26.7% top-1 error and 8.7% top-5 error with 4.7M model params.
 
 ## Architecture search (using small proxy models)
 To carry out architecture search using 2nd-order approximation, run
