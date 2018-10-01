@@ -68,7 +68,7 @@ cd cnn && python train_imagenet.py --auxiliary            # ImageNet
 ```
 Customized architectures are supported through the `--arch` flag once specified in `genotypes.py`.
 
-The CIFAR-10 result at the end of training is subject to variance due to the non-determinism of cuDNN back-prop kernels. _It would be misleading to report the result of only a single run_. By training our best cell from scratch, one should expect the average test accuracy of 10 independent runs to fall in the range of 2.76 +/- 0.09% with a high probability.
+The CIFAR-10 result at the end of training is subject to variance due to the non-determinism of cuDNN back-prop kernels. _It would be misleading to report the result of only a single run_. By training our best cell from scratch, one should expect the average test accuracy of 10 independent runs to fall in the range of 2.76 +/- 0.09% with high probability.
 
 <p align="center">
 <img src="img/cifar10.png" alt="cifar10" width="36%">
