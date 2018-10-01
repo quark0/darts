@@ -49,8 +49,9 @@ Note the _validation performance in this step does not indicate the final perfor
 
 Snapshots of the most likely convolutional & recurrent cells over time:
 <p align="center">
-<img src="img/progress_convolutional.gif" alt="progress_convolutional" width="38%">
-<img src="img/progress_recurrent.gif" alt="progress_recurrent" width="48%">
+<img src="img/progress_convolutional.gif" alt="progress_convolutional_normal" width="30%">
+<img src="img/progress_convolutional.gif" alt="progress_convolutional_reduce" width="30%">
+<img src="img/progress_recurrent.gif" alt="progress_recurrent" width="38%">
 </p>
 
 ## Architecture evaluation (using full-sized models)
