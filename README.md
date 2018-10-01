@@ -18,22 +18,22 @@ NOTE: PyTorch 0.4 is not supported at this moment and would lead to OOM.
 ## Datasets
 Instructions for acquiring PTB and WT2 can be found [here](https://github.com/salesforce/awd-lstm-lm). While CIFAR-10 can be automatically downloaded by torchvision, ImageNet needs to be manually downloaded (preferably to a SSD) following the instructions [here](https://github.com/pytorch/examples/tree/master/imagenet).
 
-## Evaluating our pretrained models
-#### CIFAR-10 ([model download](https://drive.google.com/file/d/1Y13i4zKGKgjtWBdC0HWLavjO7wvEiGOc/view?usp=sharing))
+## Evaluating the pretrained models
+#### CIFAR-10 [[model download](https://drive.google.com/file/d/1Y13i4zKGKgjtWBdC0HWLavjO7wvEiGOc/view?usp=sharing)]
 ```
-cd cnn && python3 test.py --auxiliary --model_path cifar10_model.pt
+cd cnn && python test.py --auxiliary --model_path cifar10_model.pt
 ```
 Expected result: 2.63% test error rate.
 
-#### PTB ([model download](https://drive.google.com/file/d/1Mt_o6fZOlG-VDF3Q5ModgnAJ9W6f_av2/view?usp=sharing))
+#### PTB [[model download](https://drive.google.com/file/d/1Mt_o6fZOlG-VDF3Q5ModgnAJ9W6f_av2/view?usp=sharing)]
 ```
-cd rnn && python3 test.py
+cd rnn && python test.py
 ```
 Expected result: 55.68 test ppl.
 
-#### ImageNet ([model download](https://drive.google.com/file/d/1AKr6Y_PoYj7j0Upggyzc26W0RVdg4CVX/view?usp=sharing))
+#### ImageNet [[model download](https://drive.google.com/file/d/1AKr6Y_PoYj7j0Upggyzc26W0RVdg4CVX/view?usp=sharing)]
 ```
-cd cnn && python3 test_imagenet.py --auxiliary --model_path imagenet_model.pt
+cd cnn && python test_imagenet.py --auxiliary --model_path imagenet_model.pt
 ```
 Expected result: 26.7% top-1 acc; 8.7% top-5 acc.
 
@@ -61,6 +61,8 @@ cd rnn && python train.py --data ../data/wikitext-2 \     # WT2
 cd cnn && python train_imagenet.py --auxiliary            # ImageNet
 ```
 Customized architectures are supported through the `--arch` flag once specified in `genotypes.py`.
+
+The CIFAR-10 result at epoch 600 is subject to variance due to the non-determinism of cuDNN back-prop kernels. _It would be misleading to report the result of only a single run_. By training our best cell from scratch, one should expect the average test accuracy of 10 runs to fall in the range of 2.76 +/- 0.09% with a high probability.
 
 Expected performance on CIFAR-10 (4 runs) and PTB:
 <p align="center">
