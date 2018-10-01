@@ -47,11 +47,14 @@ cd rnn && python train_search.py --unrolled     # for recurrent cells on PTB
 ```
 Note the _validation performance in this step does not indicate the final performance of the architecture_. One must train the obtained genotype/architecture from scratch using full-sized models, as described in the next section.
 
-Snapshots of the most likely normal conv, reduction conv, and recurrent cells during arch search:
+
 <p align="center">
 <img src="img/progress_convolutional_normal.gif" alt="progress_convolutional_normal" width="30%">
 <img src="img/progress_convolutional_reduce.gif" alt="progress_convolutional_reduce" width="35%">
 <img src="img/progress_recurrent.gif" alt="progress_recurrent" width="34%">
+</p>
+<p align="center">
+Snapshots of the most likely normal conv, reduction conv, and recurrent cells during arch search.
 </p>
 
 ## Architecture evaluation (using full-sized models)
@@ -67,11 +70,13 @@ Customized architectures are supported through the `--arch` flag once specified 
 
 The CIFAR-10 result at the end of training is subject to variance due to the non-determinism of cuDNN back-prop kernels. _It would be misleading to report the result of only a single run_. By training our best cell from scratch, one should expect the average test accuracy of 10 independent runs to fall in the range of 2.76 +/- 0.09% with a high probability.
 
-Expected learning curves on CIFAR-10 (4 runs), ImageNet and PTB:
 <p align="center">
 <img src="img/cifar10.png" alt="cifar10" width="36%">
 <img src="img/imagenet.png" alt="ptb" width="29%">
 <img src="img/ptb.png" alt="ptb" width="30%">
+</p>
+<p align="center">
+Expected learning curves on CIFAR-10 (4 runs), ImageNet and PTB.
 </p>
 
 ## Visualization
