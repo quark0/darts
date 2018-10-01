@@ -20,19 +20,19 @@ Instructions for acquiring PTB and WT2 can be found [here](https://github.com/sa
 
 ## Evaluating the pretrained models
 The easist way to check whether your environment is compatible with ours is to evaluate the pretrained models.
-#### CIFAR-10 [[model download](https://drive.google.com/file/d/1Y13i4zKGKgjtWBdC0HWLavjO7wvEiGOc/view?usp=sharing)]
+#### CIFAR-10 Model ([download](https://drive.google.com/file/d/1Y13i4zKGKgjtWBdC0HWLavjO7wvEiGOc/view?usp=sharing))
 ```
 cd cnn && python test.py --auxiliary --model_path cifar10_model.pt
 ```
 Expected result: 2.63% test error rate.
 
-#### PTB [[model download](https://drive.google.com/file/d/1Mt_o6fZOlG-VDF3Q5ModgnAJ9W6f_av2/view?usp=sharing)]
+#### PTB Model ([download](https://drive.google.com/file/d/1Mt_o6fZOlG-VDF3Q5ModgnAJ9W6f_av2/view?usp=sharing))
 ```
 cd rnn && python test.py
 ```
 Expected result: 55.68 test ppl.
 
-#### ImageNet [[model download](https://drive.google.com/file/d/1AKr6Y_PoYj7j0Upggyzc26W0RVdg4CVX/view?usp=sharing)]
+#### ImageNet Model ([model download](https://drive.google.com/file/d/1AKr6Y_PoYj7j0Upggyzc26W0RVdg4CVX/view?usp=sharing))
 ```
 cd cnn && python test_imagenet.py --auxiliary --model_path imagenet_model.pt
 ```
