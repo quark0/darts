@@ -24,19 +24,19 @@ The easist way to check whether your environment is compatible with ours is to e
 ```
 cd cnn && python test.py --auxiliary --model_path cifar10_model.pt
 ```
-Expected result: 2.63% test error rate (3.349MB params).
+Expected result: 2.63% test error rate with 3.349MB model params.
 
 #### PTB model ([download](https://drive.google.com/file/d/1Mt_o6fZOlG-VDF3Q5ModgnAJ9W6f_av2/view?usp=sharing))
 ```
 cd rnn && python test.py --model_path ptb_model.pt
 ```
-Expected result: 55.68 test ppl (22.960MB params).
+Expected result: 55.68 test ppl with 22.960MB model params.
 
 #### ImageNet model ([download](https://drive.google.com/file/d/1AKr6Y_PoYj7j0Upggyzc26W0RVdg4CVX/view?usp=sharing))
 ```
 cd cnn && python test_imagenet.py --auxiliary --model_path imagenet_model.pt
 ```
-Expected result: 26.7% top-1 acc and 8.7% top-5 acc (4.719MB params).
+Expected result: 26.7% top-1 acc and 8.7% top-5 acc with 4.719MB model params.
 
 ## Architecture search (using smaller proxy models)
 To carry out architecture search using 2nd-order approximation, run
