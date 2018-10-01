@@ -47,10 +47,10 @@ cd rnn && python train_search.py --unrolled     # for recurrent cells on PTB
 ```
 Note the _validation performance in this step does not indicate the final performance of the architecture_. One must train the obtained genotype/architecture from scratch using full-sized models, as described in the next section.
 
-Snapshots of the most likely convolutional & recurrent cells over time:
+Snapshots of the most likely normal conv, reduction conv, and recurrent cells during arch search:
 <p align="center">
 <img src="img/progress_convolutional_normal.gif" alt="progress_convolutional_normal" width="30%">
-<img src="img/progress_convolutional_reduce.gif" alt="progress_convolutional_reduce" width="34%">
+<img src="img/progress_convolutional_reduce.gif" alt="progress_convolutional_reduce" width="35%">
 <img src="img/progress_recurrent.gif" alt="progress_recurrent" width="34%">
 </p>
 
