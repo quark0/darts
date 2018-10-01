@@ -70,7 +70,7 @@ Expected learning curves on CIFAR-10 (4 runs), ImageNet and PTB:
 <p align="center">
 <img src="img/cifar10.png" alt="cifar10" width="35%">
 <img src="img/imagenet.png" alt="ptb" width="28%">
-<img src="img/ptb.png" alt="ptb" width="32%">
+<img src="img/ptb.png" alt="ptb" width="30%">
 </p>
 
 ## Visualization
