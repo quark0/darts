@@ -19,6 +19,7 @@ NOTE: PyTorch 0.4 is not supported at this moment and would lead to OOM.
 Instructions for acquiring PTB and WT2 can be found [here](https://github.com/salesforce/awd-lstm-lm). While CIFAR-10 can be automatically downloaded by torchvision, ImageNet needs to be manually downloaded (preferably to a SSD) following the instructions [here](https://github.com/pytorch/examples/tree/master/imagenet).
 
 ## Evaluating the pretrained models
+The easist way to check whether your environment is compatible with ours is to evaluate the pretrained models.
 #### CIFAR-10 [[model download](https://drive.google.com/file/d/1Y13i4zKGKgjtWBdC0HWLavjO7wvEiGOc/view?usp=sharing)]
 ```
 cd cnn && python test.py --auxiliary --model_path cifar10_model.pt
