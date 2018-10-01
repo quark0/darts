@@ -64,7 +64,7 @@ Customized architectures are supported through the `--arch` flag once specified 
 
 The CIFAR-10 result at epoch 600 is subject to variance due to the non-determinism of cuDNN back-prop kernels. _It would be misleading to report the result of only a single run_. By training our best cell from scratch, one should expect the average test accuracy of 10 runs to fall in the range of 2.76 +/- 0.09% with a high probability.
 
-Expected performance on CIFAR-10 (4 runs) and PTB:
+Expected learning curves on CIFAR-10 (4 runs) and PTB:
 <p align="center">
 <img src="img/cifar10.png" alt="cifar10" width="40%">
 <img src="img/ptb.png" alt="ptb" width="40%">
