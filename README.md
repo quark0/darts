@@ -47,7 +47,7 @@ cd rnn && python train_search.py --unrolled     # for recurrent cells on PTB
 ```
 Note the _validation performance in this step does not indicate the final performance of the architecture_. One must train the obtained genotype/architecture from scratch using full-sized models, as described in the next section.
 
-Also be aware that different runs would end up with different local minimum. To get the best result, it is crucial to repeat the search for multiple (4) times with different seeds, and select the best cell based on the validation performance (obtained by retraining the derived arch from scratch for a small number of epochs). Please refer to fig. 3 and sect. 3.2 in our arXiv paper.
+Also be aware that different runs would end up with different local minimum. To get the best result, it is crucial to repeat the search process with different seeds, and select the best cell based on the validation performance (obtained by retraining the derived arch from scratch for a small number of epochs). Please refer to fig. 3 and sect. 3.2 in our arXiv paper.
 
 <p align="center">
 <img src="img/progress_convolutional_normal.gif" alt="progress_convolutional_normal" width="29%">
